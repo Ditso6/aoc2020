@@ -1,4 +1,9 @@
+def opdracht1():
+    print("Antwoord op de eerste vraag: ") 
+    check_passports(create_passports(read_input(file)))
+
 def opdracht2():
+    print("Antwoord op de tweede vraag: ")
     validate_passports(create_passports(read_input(file)))
 
 def read_input(file):
@@ -21,6 +26,18 @@ def create_passports(blobs):
             passport[key] = value
         passports.append(passport)
     return passports
+
+def check_passports(passports):
+    complete_passports = 0
+    required_fields = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]
+    for passport in passports:
+        passport_required_fields = 0
+        for field in required_fields:
+            if field in passport:
+                passport_required_fields += 1
+        if passport_required_fields == 7:
+            complete_passports += 1
+    print(complete_passports)
 
 def validate_passports(passports):
     validpassports = 0
@@ -49,5 +66,6 @@ def validate_passports(passports):
 
 while True:
     file = "input.txt"
+    opdracht1()
     opdracht2()
     break

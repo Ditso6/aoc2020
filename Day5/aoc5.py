@@ -74,7 +74,8 @@ def find_my_seat():
 		if possible_seat_ID in seat_IDs :
 			continue
 		if min(seat_IDs) < possible_seat_ID < max(seat_IDs):
-			return possible_seat_ID
+			my_seat_ID = possible_seat_ID
+			return my_seat_ID
 	
 
 

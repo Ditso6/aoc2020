@@ -1,14 +1,10 @@
 def scan():
 	"""input"""
 	file = "input.txt"
-	boarding_passes = []
 
 	with open(file) as f:
 		data = f.read()
-
-	for line in data.splitlines():
-		boarding_pass = list(line)
-		boarding_passes.append(boarding_pass)
+		boarding_passes = [list(boarding_pass) for boarding_pass in data.splitlines()]
 
 	return boarding_passes
 
@@ -20,11 +16,11 @@ def determine_row(boarding_pass):
 		middle = (row_max + row_min) // 2
 		if character == "F":
 			row_max = middle
-		elif character == "B":
+		else:
 			row_min = middle + 1
 	if boarding_pass[6] == "F":
 		row = row_min
-	elif boarding_pass[6] == "B":
+	else:
 		row = row_max
 	return row
 
@@ -36,11 +32,11 @@ def determine_column(boarding_pass):
 		middle = (col_max + col_min) // 2
 		if character == "L":
 			col_max = middle
-		elif character == "R":
+		else:
 			col_min = middle + 1
 	if boarding_pass[9] == "L":
 		column = col_min
-	elif boarding_pass[9] == "R":
+	else:
 		column = col_max
 	return column
 
@@ -63,21 +59,16 @@ def scan_boarding_passes():
 
 def find_my_seat():
 	seat_IDs = scan_boarding_passes()
-	seat_IDs.sort()
 	rows = 128
 	columns = 8
 	available_seats = rows*columns
-	possible_seat_IDs = []
-	for number in range(available_seats):
-		possible_seat_IDs.append(number)
+	possible_seat_IDs = [possible_seat_ID for possible_seat_ID in range(available_seats)]
 	for possible_seat_ID in possible_seat_IDs:
 		if possible_seat_ID in seat_IDs :
 			continue
 		if min(seat_IDs) < possible_seat_ID < max(seat_IDs):
 			my_seat_ID = possible_seat_ID
 			return my_seat_ID
-	
 
-
-print("Hoogste Seat ID = ", max(scan_boarding_passes()))
-print("Mijn stoel = seat_ID", find_my_seat())
+print("Hoogste Seat ID =", max(scan_boarding_passes()))
+print("Mijn stoel = seat ID", find_my_seat())

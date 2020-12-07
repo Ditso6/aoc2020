@@ -37,9 +37,6 @@ print(len(answerbags))
 
 
 def findcontent(bag_colour):
-    if len(rules[bag_colour]) == 0:
-        return 0
-
     count = 0
     for bag in rules[bag_colour]:
         bags = rules[bag_colour][bag]
